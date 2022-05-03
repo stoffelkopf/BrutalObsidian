@@ -1,0 +1,10 @@
+decal Skel_Poster
+{
+    pic SKELPOSTER
+}
+decal FlemSplat
+{
+   pic BAL8D0
+   randomflipx
+   randomflipy
+}

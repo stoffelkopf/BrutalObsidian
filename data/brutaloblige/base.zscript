@@ -1,0 +1,464 @@
+class BrutalObligeHandler : EventHandler
+{
+	// get all monsters
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		if (( e.Thing.bIsMonster && !(e.Thing is "PlayerPawn") ))
+		{
+			//do something to the monsters
+			//e.Thing.A_
+		}
+	}
+	
+	override void CheckReplacement (ReplaceEvent e)
+	{
+		//replace themed skinned monsters with originals
+		if ( GetDefaultByType(e.Replacee).GetClassName() == "d4cacodemon" && BrutalObligeGetParameter("urbanmonsterskins") == "false" )
+		{
+			e.Replacement = 'Cacodemon_';
+		}
+	}
+	
+    //on loading into map
+	override void WorldLoaded( WorldEvent e )
+	{
+        Actor.Spawn("BrutalObligeTester",(0,0,0));
+	}
+	
+	//read parameters
+	virtual string BrutalObligeGetParameter(string param)
+	{
+        int lmp;
+		if ( (lmp = Wads.FindLump("BOPARAMS")) == -1 )
+		{
+			return("parameter not found");
+		}
+        string pstring = Wads.ReadLump(lmp);
+		int ppos = pstring.IndexOf(param);
+		int pposr = pstring.IndexOf(';',ppos);
+		int pposlen = pposr-ppos;
+		pstring = pstring.Mid(ppos,pposlen);
+		ppos = pstring.IndexOf('=')+1;
+		pposlen = pstring.Length();
+		string retstring = pstring.Mid(ppos,pposlen);
+		return(retstring);
+	}
+}
+
+
+//Add a BrutalObligeActor with exciting new functions
+class BrutalObligeActor : Actor
+{
+    //for spawning things in the map
+	virtual void A_SpawnIfExists(string type, string default, float xofs, float yofs, float zofs, float xvel, float yvel, float zvel, float angle, int flags, int failchance, int tid)
+	{
+		string classname = type;
+		class<Actor> cls = classname;
+		if (cls)
+		{
+			A_SpawnItemEx(cls, xofs, yofs, zofs, xvel, yvel, zvel, angle, flags, failchance, tid);
+		}
+		else
+		{
+			A_SpawnItemEx(default, xofs, yofs, zofs, xvel, yvel, zvel, angle, flags, failchance, tid);
+		}
+	}
+	
+	virtual void A_SpawnRandom(string type1, string type2, float xofs, float yofs, float zofs, float xvel, float yvel, float zvel, float angle, int flags, int failchance, int tid)
+	{
+		string classname = type1;
+		class<Actor> cls = classname;
+		if (cls)
+		{
+			if (random(1,2) == 2)
+			{
+				A_SpawnItemEx(cls, xofs, yofs, zofs, xvel, yvel, zvel, angle, flags, failchance, tid);
+			}
+			else
+			{
+			A_SpawnItemEx(type2, xofs, yofs, zofs, xvel, yvel, zvel, angle, flags, failchance, tid);
+			}
+		}
+		else
+		{
+			A_SpawnItemEx(type2, xofs, yofs, zofs, xvel, yvel, zvel, angle, flags, failchance, tid);
+		}
+	}
+	
+	//for getting level info dynamically
+	virtual int A_GetLevelNumber()
+	{
+		//level.MapName - lump name
+		//level.LevelName - nice name
+		//level.levelnum - integer number
+		return level.levelnum;
+	}
+	
+	//for gore
+	virtual void A_SpawnProjectileGib(class<Actor> missiletype, double spawnheight = 32, double spawnofs_xy = 0, double angle = 0, int flags = 0, double pitch = 0, int ptr = AAPTR_TARGET)
+	{
+        Actor gib = A_SpawnProjectile(missiletype, spawnheight, spawnofs_xy, angle, flags, pitch, ptr);
+		
+		if (gib != null)
+		{
+			gib.A_SetRenderStyle(1,GetRenderStyle ());
+			gib.Scale.X=self.Scale.X;
+			gib.Scale.Y=self.Scale.Y;
+			//gib.A_SetTranslation(self.Translation);
+		}
+		
+	}
+	
+	//read parameters
+	virtual string BrutalObligeGetParameter(string param)
+	{
+        int lmp;
+		if ( (lmp = Wads.FindLump("BOPARAMS")) == -1 )
+		{
+			A_Log("BOPARAMS not found");
+			return("parameter not found");
+		}
+        string pstring = Wads.ReadLump(lmp);
+		int ppos = pstring.IndexOf(param);
+		int pposr = pstring.IndexOf(';',ppos);
+		int pposlen = pposr-ppos;
+		pstring = pstring.Mid(ppos,pposlen);
+		ppos = pstring.IndexOf('=')+1;
+		pposlen = pstring.Length();
+		string retstring = pstring.Mid(ppos,pposlen);
+		return(retstring);
+	}
+}
+
+Class BrutalObligeTester : BrutalObligeActor
+{
+    Default
+    {
+    }
+    
+    States
+    {
+		Spawn:
+			TNT1 AA 1;
+		stop;
+    }
+
+}
+
+Class BrutalObligeMonster : BrutalObligeActor
+{
+    Default
+    {
+        //$Category "Monsters"
+        +USEKILLSCRIPTS
+        Monster;
+    }
+    
+    States
+    {
+        Death.SuperPlasma:
+        Death.Plasma:
+        Death.Plasma2:
+            PBR1 A 6 A_Scream;
+            TNT1 AAAAAAAAAAAAAAAAAA 0 A_SpawnProjectile ("Ashes1", 32, 0, random (0, 360), 2, random (0, 180));
+            TNT1 AAAAAAAAAAAAAAAAAA 0 A_SpawnProjectile ("Ashes2", 32, 0, random (0, 360), 2, random (0, 180));
+            TNT1 AAAA 0 A_SpawnProjectile ("BluePlasmaFireNonStatic", 32, 0, random (0, 360), 2, random (0, 180));
+            PBR1 B 6 A_NoBlocking;
+            PBR1 CDEFGH 6 A_SpawnProjectile ("Blood", 10, 0, random (0, 360), 2, random (0, 160));
+            PBR1 HHHHHHHHHHHHHHHHHHHHHH 8 A_SpawnProjectile ("PlasmaSmoke", 10, 0, random (0, 360), 2, random (0, 160));
+            PBR1 H -1;
+        Stop;
+    }
+
+}
+
+Class BrutalObligeWeaponPlacer : BrutalObligeActor
+{
+    string weapon, defaultweapon, purist;
+    
+    Property weapon: weapon;
+    Property defaultweapon: defaultweapon;
+    Property purist: purist;
+    
+    Default
+    {
+        //$Category "Weapons"
+        BrutalObligeWeaponPlacer.weapon "";
+        BrutalObligeWeaponPlacer.defaultweapon "";
+        BrutalObligeWeaponPlacer.purist "";
+    }
+    
+    States
+    {
+        Spawn:
+            TNT1 A 0;
+            TNT1 A 0 A_SpawnIfExists(weapon,defaultweapon,0,0,0,0,0,0,0,SXF_TRANSFERSPECIAL | SXF_TRANSFERAMBUSHFLAG | SXF_TRANSFERPOINTERS | 288, 0, 0);
+        Stop;
+    }
+}
+
+Class PBZspawner : BrutalObligeActor
+{
+	int tiers;
+	string tier1, tier2, tier3, tier4, tier5, tier6, tier7, tier8, tier9, tier10, tier11, tier12;
+	string dtier1, dtier2, dtier3, dtier4, dtier5, dtier6, dtier7, dtier8, dtier9, dtier10, dtier11, dtier12;
+	
+	StateLabel jumpsto;
+	
+	Property tiers: tiers;
+	Property tier1: tier1;
+	Property tier2: tier2;
+	Property tier3: tier3;
+	Property tier4: tier4;
+	Property tier5: tier5;
+	Property tier6: tier6;
+	Property tier7: tier7;
+	Property tier8: tier8;
+	Property tier9: tier9;
+	Property tier10: tier10;
+	Property tier11: tier11;
+	Property tier12: tier12;
+	
+	Property dtier1: dtier1;
+	Property dtier2: dtier2;
+	Property dtier3: dtier3;
+	Property dtier4: dtier4;
+	Property dtier5: dtier5;
+	Property dtier6: dtier6;
+	Property dtier7: dtier7;
+	Property dtier8: dtier8;
+	Property dtier9: dtier9;
+	Property dtier10: dtier10;
+	Property dtier11: dtier11;
+	Property dtier12: dtier12;
+	
+	Default
+	{
+		+NOTDMATCH
+		PBZSpawner.tiers 12;
+		PBZSpawner.tier1 "DoomImp";
+		PBZSpawner.tier2 "DoomImp";
+		PBZSpawner.tier3 "DoomImp";
+		PBZSpawner.tier4 "DoomImp";
+		PBZSpawner.tier5 "DoomImp";
+		PBZSpawner.tier6 "DoomImp";
+		PBZSpawner.tier7 "DoomImp";
+		PBZSpawner.tier8 "DoomImp";
+		PBZSpawner.tier9 "DoomImp";
+		PBZSpawner.tier10 "DoomImp";
+		PBZSpawner.tier11 "DoomImp";
+		PBZSpawner.tier12 "DoomImp";
+		
+		PBZSpawner.dtier1 "";
+		PBZSpawner.dtier2 "";
+		PBZSpawner.dtier3 "";
+		PBZSpawner.dtier4 "";
+		PBZSpawner.dtier5 "";
+		PBZSpawner.dtier6 "";
+		PBZSpawner.dtier7 "";
+		PBZSpawner.dtier8 "";
+		PBZSpawner.dtier9 "";
+		PBZSpawner.dtier10 "";
+		PBZSpawner.dtier11 "";
+		PBZSpawner.dtier12 "";
+	}
+	
+	States
+	{
+		Spawn:
+			TNT1 A 0;
+			TNT1 A 1 PBZSpawnjump();
+			TNT1 A 1 A_Jump(256,jumpsto);
+			TNT1 A 1;
+		stop;
+		Spawner1:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(1);
+			TNT1 A 1;
+		stop;
+		spawner2:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(2);
+			TNT1 A 1;
+		stop;
+		spawner3:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(3);
+			TNT1 A 1;
+		stop;
+		spawner4:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(4);
+			TNT1 A 1;
+		stop;
+		spawner5:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(5);
+			TNT1 A 1;
+		stop;
+		spawner6:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(6);
+			TNT1 A 1;
+		stop;
+		spawner7:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(7);
+			TNT1 A 1;
+		stop;
+		spawner8:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(8);
+			TNT1 A 1;
+		stop;
+		spawner9:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(9);
+			TNT1 A 1;
+		stop;
+		spawner10:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(10);
+			TNT1 A 1;
+		stop;
+		spawner11:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(11);
+			TNT1 A 1;
+		stop;
+		spawner12:
+			TNT1 A 0;
+			TNT1 A 1 PBZspawnthing(12);
+			TNT1 A 1;
+		stop;
+	}
+	
+	virtual void PBZspawnjump()
+	{
+		//BrutalSpawnBalance is the Cvar, atw menudef defines the levels as follows
+		/*
+		1, "Default Random"
+		2, "Brutal Doom Classic"
+		3, "Alternative"
+		4, "Death Wish"
+		5, "Tier I"
+		6, "Tier II"
+		7, "Tier III"
+		8, "Tier IV"
+		9, "Dynamic Progression"
+		*/
+		
+		CVar spawnsettingcvar = CVar.FindCVar('BrutalSpawnBalance');
+		int spawntype = spawnsettingcvar.GetInt();
+		
+		int levelnum;
+		
+		switch(spawntype)
+		{
+			default: levelnum = random(1,tiers); break; //totally random
+			case 5: levelnum = 1; break; //tier 1
+			case 6: levelnum = 2; break; //tier 2
+			case 7: levelnum = 3; break; //tier 3
+			case 8: levelnum = 4; break; //tier 4
+			case 9: levelnum = A_GetLevelNumber() / 2 - 1; break; //dynamic progression
+		}
+		
+		if (levelnum < 1) {levelnum = 1;}
+		if (levelnum > (tiers) ) {levelnum = (tiers);}
+		
+		
+		//jump to the spawn state
+		if (levelnum == 1) {jumpsto="Spawner1";}
+		if (levelnum == 2) {jumpsto="spawner2";}
+		if (levelnum == 3) {jumpsto="spawner3";}
+		if (levelnum == 4) {jumpsto="spawner4";}
+		if (levelnum == 5) {jumpsto="spawner5";}
+		if (levelnum == 6) {jumpsto="spawner6";}
+		if (levelnum == 7) {jumpsto="spawner7";}
+		if (levelnum == 8) {jumpsto="spawner8";}
+		if (levelnum == 9) {jumpsto="spawner9";}
+		if (levelnum == 10) {jumpsto="spawner10";}
+		if (levelnum == 11) {jumpsto="spawner11";}
+		if (levelnum == 12) {jumpsto="spawner12";}
+		
+		//A_SpawnIfExists(spawns[levelnum][0],spawns[levelnum][1],0,0,0,0,0,0,0,SXF_TRANSFERSPECIAL | SXF_TRANSFERAMBUSHFLAG | SXF_TRANSFERPOINTERS | 288, 0, 0);
+	}
+	
+	virtual void PBZspawnthing(int level)
+	{
+		string spawns[12][12];
+		spawns[0][0] = tier1;
+		if (dtier1 == "")
+		{spawns[0][1] = tier1;}
+		else
+		{spawns[0][1] = dtier1;}
+		
+		spawns[1][0] = tier2;
+		if (dtier2 == "")
+		{spawns[1][1] = tier2;}
+		else
+		{spawns[1][1] = dtier2;}
+		
+		spawns[2][0] = tier3;
+		if (dtier3 == "")
+		{spawns[2][1] = tier3;}
+		else
+		{spawns[2][1] = dtier3;}
+		
+		spawns[3][0] = tier4;
+		if (dtier4 == "")
+		{spawns[3][1] = tier4;}
+		else
+		{spawns[3][1] = dtier4;}
+		
+		spawns[4][0] = tier5;
+		if (dtier5 == "")
+		{spawns[4][1] = tier5;}
+		else
+		{spawns[4][1] = dtier5;}
+		
+		spawns[5][0] = tier6;
+		if (dtier6 == "")
+		{spawns[5][1] = tier6;}
+		else
+		{spawns[5][1] = dtier6;}
+		
+		spawns[6][0] = tier7;
+		if (dtier7 == "")
+		{spawns[6][1] = tier7;}
+		else
+		{spawns[6][1] = dtier7;}
+		
+		spawns[7][0] = tier8;
+		if (dtier8 == "")
+		{spawns[7][1] = tier8;}
+		else
+		{spawns[7][1] = dtier8;}
+		
+		spawns[8][0] = tier9;
+		if (dtier9 == "")
+		{spawns[8][1] = tier9;}
+		else
+		{spawns[8][1] = dtier9;}
+		
+		spawns[9][0] = tier10;
+		if (dtier10 == "")
+		{spawns[9][1] = tier10;}
+		else
+		{spawns[9][1] = dtier10;}
+		
+		spawns[10][0] = tier11;
+		if (dtier11 == "")
+		{spawns[10][1] = tier11;}
+		else
+		{spawns[10][1] = dtier11;}
+		
+		spawns[11][0] = tier12;
+		if (dtier12 == "")
+		{spawns[11][1] = tier12;}
+		else
+		{spawns[11][1] = dtier12;}
+		
+		A_SpawnIfExists(spawns[level-1][0],spawns[level-1][1],0,0,0,0,0,0,0,SXF_TRANSFERSPECIAL | SXF_TRANSFERAMBUSHFLAG | SXF_TRANSFERPOINTERS | 288, 0, 0);
+	}
+}

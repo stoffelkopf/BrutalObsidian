@@ -1,0 +1,15 @@
+actor ObligeBlurSphere : Blursphere 318 {}
+
+actor ObligeCapturedMarineShotgun : CapturedMarineShotgun 345 {}
+actor ObligeCapturedMarineMinigun : CapturedMarineMinigun 346 {}
+actor ObligeCapturedMarinePlasma : CapturedMarinePlasma 347 {}
+
+actor ObligeDemonRuneBaron : DemonRuneBaron 371
+{
+    Powerup.Duration -30
+}
+
+actor ObligeDemonRuneRevenant : DemonRuneRevenant 372
+{
+    Powerup.Duration -30
+}

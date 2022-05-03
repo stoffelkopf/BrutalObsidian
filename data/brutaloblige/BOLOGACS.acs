@@ -1,0 +1,134 @@
+#library "BOLOGACS"
+#include "zcommon.acs"
+
+script "BBGORE_CheckKill" KILL
+{
+
+	//First we check if it's actually a monster, and if it bleeds.
+	if (CheckFlag(0, "ISMONSTER")  || !CheckFlag(0, "NOBLOOD"))
+		{
+				//Minimal health for gibbing.
+				if (GetActorProperty(0, APROP_Health) < (-30))
+					{
+					
+					//Possibly a Lost Soul or something similar, don't spawn anything.
+					if (GetActorProperty(0, APROP_RenderStyle) != STYLE_Normal) {	terminate;}	
+					
+					//Possibly a tiny thing like a rat or a spider.
+					if (GetActorProperty(0, APROP_Height) < 9.0) {	
+					Spawn("SawBlood", GetACtorX(0), GetACtorY(0), GetActorZ(0)); 
+					SetActorProperty(0, APROP_ScaleX, 0.001); SetActorProperty(0, APROP_ScaleY, 0.001);
+					terminate;}	
+					
+					//Possibly a medium thing like a dog.
+					if (GetActorProperty(0, APROP_Height) < 32.0) {	
+					Spawn("MeatDeath_BologneseSmall", GetACtorX(0), GetACtorY(0), GetActorZ(0)); 
+					SetActorProperty(0, APROP_ScaleX, 0.001); SetActorProperty(0, APROP_ScaleY, 0.001);
+					terminate;}	
+					
+					//Normal gibs
+					Spawn("MeatDeath_Bolognese", GetACtorX(0), GetACtorY(0), GetActorZ(0));
+					//Might be a large enemy, like a Cacodemon or a Mancubus, spawn extra gibs.
+					if (GetActorProperty(0, APROP_Radius) > 30.0) {	Spawn("MeatDeath_BologneseFat", GetACtorX(0), GetACtorY(0), GetActorZ(0));}	
+					//Might be a huge enemy, like a Cyberdemon, spawn extra gibs.
+					if (GetActorProperty(0, APROP_Height) > 100.0){	Spawn("MeatDeath_BologneseGiant", GetACtorX(0), GetACtorY(0), GetActorZ(0));}	
+					SetActorProperty(0, APROP_ScaleX, 0.001);
+					SetActorProperty(0, APROP_ScaleY, 0.001);
+					terminate;
+					}
+				
+			delay(35);
+			Spawn("GrowingBloodPool", GetACtorX(0), GetACtorY(0), GetActorZ(0));
+		}
+		
+	
+}
+
+Script "BD_CheckBloodIntensity" (VOID)
+{
+
+	if	(GetCvar("isrunningzandronum") == 1)
+	{
+	if	(GetCvar( "bd_bloodamount") == 0) { SetActorState(0,"LowBlood"); }
+	if	(GetCvar( "bd_bloodamount") == 1) { SetActorState(0,"LowBlood"); }
+	if	(GetCvar( "bd_bloodamount") == 3) { SetActorState(0,"LotsOfBlood"); }
+	if	(GetCvar( "bd_bloodamount") >= 4) { SetActorState(0,"AbsurdBlood"); }
+	}
+
+
+	if	(GetCvar("isrunningzandronum") == 0)
+	{
+	if	(GetCvar("zdoombrutalblood") == 0) { SetActorState(0,"LowBlood"); }
+	if	(GetCvar("zdoombrutalblood") == 1) { SetActorState(0,"LowBlood"); }
+	if	(GetCvar("zdoombrutalblood") == 3) { SetActorState(0,"LotsOfBlood"); }
+	if	(GetCvar("zdoombrutalblood") == 4) { SetActorState(0,"AbsurdBlood"); }
+	}
+
+
+	if	(GetCvar("isrunningzandronum") == 1)
+	{
+		if	(GetCvar("bd_bloodamount") >= 5)
+			{
+			SetActorState(0,"AbsurdBlood"); 
+			GiveInventory("AnimuGore", 1);
+			}
+	}
+
+	if	(GetCvar("isrunningzandronum") == 0)
+	{
+	if	(GetCvar("zdoombrutalblood") >= 5)
+		{
+		SetActorState(0,"AbsurdBlood"); 
+		GiveInventory("AnimuGore", 1);
+		}
+	}
+
+}
+
+
+
+Script "BD_CheckIfLowBlood" (VOID)
+{
+if	(GetCvar("bd_bloodamount") == 1) { SetActorState(0,"Vanish"); }
+if	(GetCvar("bd_bloodamount") == 0) { SetActorState(0,"Vanish"); }
+}
+
+
+
+script "BD_CheckIfOverLiquid" (void) //Water Small Splash
+{
+	if (CheckActorFloorTexture(0, "FWATER1"))    GiveInventory("IsOverWater", 1);
+	if (CheckActorFloorTexture(0, "FWATER2"))    GiveInventory("IsOverWater", 1);
+	if (CheckActorFloorTexture(0, "FWATER3"))    GiveInventory("IsOverWater", 1);
+	if (CheckActorFloorTexture(0, "FWATER4"))    GiveInventory("IsOverWater", 1);
+	
+  if (CheckActorFloorTexture(0, "NUKAGE1"))    GiveInventory("IsOverNukage", 1);
+  if (CheckActorFloorTexture(0, "NUKAGE2"))    GiveInventory("IsOverNukage", 1);
+  if (CheckActorFloorTexture(0, "NUKAGE3"))    GiveInventory("IsOverNukage", 1);
+  if (CheckActorFloorTexture(0, "NUKAGE4"))    GiveInventory("IsOverNukage", 1);
+	
+  	
+  if (CheckActorFloorTexture(0, "SLIME01"))    GiveInventory("IsOverSlime", 1);
+  if (CheckActorFloorTexture(0, "SLIME02"))    GiveInventory("IsOverSlime", 1);
+  if (CheckActorFloorTexture(0, "SLIME03"))    GiveInventory("IsOverSlime", 1);
+  if (CheckActorFloorTexture(0, "SLIME04"))    GiveInventory("IsOverSlime", 1);
+  if (CheckActorFloorTexture(0, "SLIME05"))    GiveInventory("IsOverSlime", 1);
+  if (CheckActorFloorTexture(0, "SLIME06"))    GiveInventory("IsOverSlime", 1);
+  if (CheckActorFloorTexture(0, "SLIME07"))    GiveInventory("IsOverSlime", 1);
+  if (CheckActorFloorTexture(0, "SLIME08"))    GiveInventory("IsOverSlime", 1);
+  
+  if (CheckActorFloorTexture(0, "SLIME09"))    GiveInventory("IsOverLava", 1);
+  if (CheckActorFloorTexture(0, "SLIME10"))    GiveInventory("IsOverLava", 1);
+  if (CheckActorFloorTexture(0, "SLIME11"))    GiveInventory("IsOverLava", 1);
+  if (CheckActorFloorTexture(0, "SLIME12"))    GiveInventory("IsOverLava", 1);
+  
+  if (CheckActorFloorTexture(0, "LAVA1"))    GiveInventory("IsOverLava", 1);
+  if (CheckActorFloorTexture(0, "LAVA2"))    GiveInventory("IsOverLava", 1);
+  if (CheckActorFloorTexture(0, "LAVA3"))    GiveInventory("IsOverLava", 1);
+  if (CheckActorFloorTexture(0, "LAVA4"))    GiveInventory("IsOverLava", 1);
+	
+  if (CheckActorFloorTexture(0, "BLOOD1"))    GiveInventory("IsOverBlood", 1);
+  if (CheckActorFloorTexture(0, "BLOOD2"))    GiveInventory("IsOverBlood", 1);
+  if (CheckActorFloorTexture(0, "BLOOD3"))    GiveInventory("IsOverBlood", 1);
+  if (CheckActorFloorTexture(0, "BLOOD4"))    GiveInventory("IsOverBlood", 1);
+}

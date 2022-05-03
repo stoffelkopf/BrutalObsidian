@@ -1,0 +1,327 @@
+actor classicwolf : BOBaseWolfensteinSS 313
+{
+//$Category Monsters/Wolfenstein
+//$EditorSprite "SSWVA1"
+Tag "Classic Wolfenstein 3D SS"
+DropItem "Clip1"
+}
+actor ObligeBelphegor : Belphegor2 302
+{
+//$Category Monsters
+//$EditorSprite "BOS3A1"
+Tag "Belphegor"
+}
+
+actor ObligeJuggernaut : Juggernaut 303
+{
+//$Category Monsters
+//$EditorSprite "BS1WA1"
+Tag "Juggernaut"
+Health 5000  
+}
+
+actor ObligeEasyMarine : EvilMarineRifle 307
+{
+//$Category Monsters/Evil Marines
+//$EditorSprite "PLAYA1"
+Tag "Evil Grunt"
+}
+
+actor ObligeSS : Nazi 311
+{
+//$Category Monsters/Wolfenstein
+//$EditorSprite "NAZIA1"
+Tag "Brutal Doom SS"
+}
+
+ACTOR BrutalZyberdemon : TheCyberdemon 324
+{
+//$Category Monsters
+//$EditorSprite "ZYBRA1"
+Tag "Zyberdemon"
+Health 4500
+AttackSound "spider/attack"
+Height 132
+States
+{
+   Death.KillMe:
+   Death.Taunt:
+	TNT1 A 0 A_ChangeFlag("SOLID", 0)
+       TNT1 A 0 A_SpawnItem("TheCyberdemon")
+       Stop	
+	Pain.Killme:
+		TNT1 A 0
+	Goto See
+    ReplaceVanilla:
+		TNT1 A 0 A_ChangeFlag("THRUACTORS", 1)
+		TNT1 A 0 A_ChangeFlag("COUNTKILL", 0)
+		TNT1 A 0 A_SpawnItemEx ("VanillaCyberdemon",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION | SXF_TRANSFERAMBUSHFLAG ,0)
+		Stop
+    Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		TNT1 A 0 A_GiveInventory("TargetIsACyberdemon")	
+	Stand:	
+        ZYBR D 10 A_Look
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+        ZYBR Z 10 A_Look
+        Loop
+	See:
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		TNT1 A 0 A_SpawnItem("HeavyFootSteps32")
+		ZYBR A 3 A_Hoof
+		ZYBR A 3
+		TNT1 A 0 A_JumpIfCloser(120, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR AA 2 A_Chase
+		TNT1 A 0 A_JumpIfCloser(120, "Stomp")
+		ZYBR BB 2 A_Chase
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+        ZYBR BBC 2 A_Chase
+		TNT1 A 0 A_SpawnItem("HeavyFootSteps32")
+		TNT1 A 0 A_JumpIfCloser(120, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+        ZYBR C 2 A_Chase
+		ZYBR C 2
+		ZYBR C 2 A_Metal
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR D 2 A_Chase
+		ZYBR D 2 A_Chase
+		TNT1 A 0 A_JumpIfCloser(120, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR DD 2 A_Chase
+		Loop
+	Missile:
+		TNT1 A 0 A_TakeInventory("BrutalCounter",5)
+	    TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_JumpIfInventory("Enraged", 1, "SpecialAttack")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 8 A_FaceTarget
+	FireMissile:
+		TNT1 A 0 A_JumpIfInventory("BrutalCounter",5,"See")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 3 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,0,0)
+		TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 3 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,-7,0)
+		TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 3 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,7,0)
+		TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 3 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,0,0)
+		TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_GiveInventory("BrutalCounter",1)
+		Goto FireMissile 
+	Stomp:
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR Z 5 A_FaceTarget
+		TNT1 A 0 A_Recoil(-5)
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+	    CYMA A 7 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		TNT1 A 0 A_SpawnProjectile("CyberStomp",10,0,0,0)
+	    CYMA B 7
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		CYMA B 7
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		Goto See
+	Death:
+		ZYBR H 10
+		EXPL A 0 Radius_Quake (6, 100, 0, 22, 0)
+        TNT1 AAAA 0 A_SpawnProjectile ("ExplosionSpawner", 90, 0, random (0, 360), 2, random (0, 180))
+        TNT1 AAAAAA 0 A_SpawnProjectile ("ExplosionSpawner", 90, 0, random (0, 360), 2, random (0, 180))
+        TNT1 AAAA 0 A_SpawnProjectile ("UltraGoreSPawner", 90, 0, random (0, 360), 2, random (0, 180))
+		TNT1 A 0 A_SpawnProjectile ("XDeathCyberdemonHead", 120, 0, random (0, 360), 2, random (0, 180))
+		TNT1 A 0 A_SpawnProjectile ("XDeathCyberdemonArm", 120, 0, random (0, 360), 2, random (0, 180))
+		TNT1 A 0 A_SpawnProjectile ("XDeathCyberdemonGun", 120, 0, random (0, 360), 2, random (0, 180))
+		TNT1 A 0 A_SpawnProjectile ("XDeathCyberdemonPiece", 120, 0, random (0, 360), 2, random (0, 180))
+		TNT1 A 0 A_SpawnProjectile ("XDeathCyberdemonTorso", 120, 0, random (0, 360), 2, random (0, 180))
+        TNT1 AAAAAA 0 A_SpawnProjectile ("UltraGoreSpawner", 90, 0, random (0, 360), 2, random (0, 180))
+        TNT1 A 0 A_SpawnProjectile ("CyberXDeath", 0, 0, random (0, 360), 2, random (0, 160))
+		ZYBR I 5 A_Scream
+		ZYBR JKL 5
+		ZYBR M 5 A_NoBlocking
+		ZYBR NOP 5
+		ZYBR P 120
+		TNT1 A 0 A_BossDeath
+		ZYBR P -1 A_BossDeath
+		Stop
+	Death.Decaptate:
+	    TNT1 A 0 A_SpawnProjectile ("XDeathCyberdemonHead", 120, 0, random (0, 360), 2, random (0, 180))
+		TNT1 AAAAAAAAA 0 A_SpawnProjectile ("XDeath1", 120, 0, random (0, 360), 2, random (0, 180))
+		CYBB AAAAA 8 A_SpawnItem("MuchBlood", 0, 120)
+		CYBB ABCABCB 8 A_SpawnItem("MuchBlood", 0, 120)
+		EXPL A 0 Radius_Quake (6, 100, 0, 22, 0)
+        TNT1 AAAA 0 A_SpawnProjectile ("ExplosionSpawner", 90, 0, random (0, 360), 2, random (0, 180))
+        TNT1 AAAAAA 0 A_SpawnProjectile ("ExplosionSpawner", 90, 0, random (0, 360), 2, random (0, 180))
+        TNT1 AAAA 0 A_SpawnProjectile ("UltraGoreSPawner", 90, 0, random (0, 360), 2, random (0, 180))
+        TNT1 AAAAAA 0 A_SpawnProjectile ("UltraGoreSpawner", 90, 0, random (0, 360), 2, random (0, 180))
+        TNT1 A 0 A_SpawnProjectile ("CyberXDeath", 0, 0, random (0, 360), 2, random (0, 160))
+		ZYBR I 0 A_Fall
+		ZYBR JKL 0
+		ZYBR M 0 A_NoBlocking
+		ZYBR NOP 0
+		ZYBR P 120
+		ZYBR P -1 A_BossDeath
+		Stop
+    Crush:
+        TNT1 A 0 A_PlaySound("misc/xdeath4")
+        CRS3 A 5
+        CRS3 A -1
+        Stop
+	Pain.Taunt:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Enraged", 1, "SpecialAttack")
+		SPOS B 0 A_Pain
+		TNT1 A 0 A_ChangeFlag("FASTER", 1)
+		TNT1 A 0 A_ChangeFlag("MISSILEMORE", 1)
+		TNT1 A 0 A_ChangeFlag("MISSILEEVENMORE", 1)
+		TNT1 A 0 A_PlaySound("demon/pain")
+		CYBT A 1 A_FaceTarget
+		CYBT ABCCBADE 4
+		TNT1 A 0 A_PlaySound("CYBTAT", 1)
+		CYBT FGHGFGHGFGHGFGHG 3
+		CYBT EDA 4
+		TNT1 A 0 A_GiveInventory("Enraged", 1)
+		Goto Missile
+	SpecialAttack:
+		TNT1 A 0 A_TakeInventory("BrutalCounter",5)
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 6 A_FaceTarget
+	FireSpecial:
+		TNT1 A 0 A_JumpIfInventory("BrutalCounter",5,"See")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 2 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,0,0)
+		TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 2 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,-7,0)
+		TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 2 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,7,0)
+		TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 2 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,0,0)
+		TNT1 A 0 A_JumpIfCloser(180, "Stomp")
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 2 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,0,0)
+		ZYBR E 4 A_FaceTarget
+		TNT1 A 0 A_SpawnItem("CybersHitBox", 0, 100,0)
+		ZYBR F 2 BRIGHT A_SpawnProjectile("MastermindTracer",66,-25,0,0)
+		TNT1 A 0 A_GiveInventory("BrutalCounter",1)
+		Goto FireMissile	
+	}
+}
+actor ObligeLabguy : Labguy 335
+{
+//$Category Monsters
+//$EditorSprite "SCZAA1"
+Tag "Lab Zombie"
+}
+actor ObligeAncientArachnotron : Arachnotron2 336
+{
+//$Category Monsters
+//$EditorSprite "ARACA1"
+Tag "Ancient Arachnotron"
+}
+actor ObligeVolcabus : Volcabus 337
+{
+//$Category Monsters
+//$EditorSprite "FAT2B1"
+Tag "Volcabus"
+}
+actor ObligeMummy : BDMummy 338
+{
+//$Category Monsters
+//$EditorSprite "MUMAB1"
+Tag "Mummy"
+}
+actor ObligeRifleZombie : RifleZombie 343 //remove the chance to replace with variants as Oblige handles these seperately
+{
+//$Category Monsters
+//$EditorSprite "PSSSB1"
+Tag "Rifle Zombie"
+States
+{
+    ReplaceAxeman:
+        Goto Stand
+    ReplaceBeheaded:
+        Goto Stand
+    ReplacePistol:
+        Goto Stand
+}
+}
+actor ObligePistolZombie : PistolZombie 344
+{
+//$Category Monsters
+//$EditorSprite "PONHB1"
+Tag "Pistol Zombie"
+}
+actor ObligeEvilMarinePlasma : EvilMarinePlasma replaces WolfensteinSS
+{
+    //$Category Monsters/Evil Marines
+    //$EditorSprite "PLAYA1"
+    Tag "Evil Marine"
+}
+//bd21testfeb24
+actor ObligeShotgunGuy : ShotgunGuy1 replaces ShotgunGuy1 //remove the chance to replace with variants as Oblige handles these seperately
+{
+    //$Category Monsters
+    //$EditorSprite "SPSSZ1"
+    Tag "Shotgun Zombie"
+    states
+    {
+        ReplaceSMG:
+            Goto Stand
+    }
+}
+actor ObligeSMGZombie: SMGGuy 363
+{
+    //$Category Monsters
+    //$EditorSprite "PSS3A1"
+    Tag "SMG Zombie"
+}
+
+actor ObligeUbersoldat: Ubersoldat 366
+{
+    //$Category Monsters/Wolfenstein
+    //$EditorSprite "CPOSB1"
+    Tag "Ubersoldat"
+}
+actor ObligeExperiment : Experiment 369
+{
+//$Category Monsters
+//$EditorSprite "ZKELB1"
+Tag "Experiment"
+}
+actor ADog : mbfhelperdog 370
+{
+    //$Category Monsters/Wolfenstein
+    Tag "Dog"
+    Health 80
+    Speed 8
+    PainChance 180
+    PainChance "Kick", 255
+    +USEKILLSCRIPTS
+}
+actor ObligeMother : Motherdemon 348
+{
+  Tag "Motherdemon"
+  Health 6000  
+}

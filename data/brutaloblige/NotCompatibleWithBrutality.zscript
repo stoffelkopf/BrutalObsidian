@@ -1,0 +1,55 @@
+extend class brutalobligeactor
+{
+    virtual void A_BrutalBrainSplatter()
+        {
+            A_PlaySound("misc/xdeath4");
+            A_SpawnProjectile ("Brains1", 50, 0, random (0, 360), 2, random (0, 160));
+            A_SpawnProjectile ("Brains3", 50, 0, random (0, 360), 2, random (0, 160));
+            A_SpawnProjectile ("Brains6", 50, 0, random (0, 360), 2, random (0, 160));
+            A_SpawnProjectile ("SmallBrainPieceFast", random (45, 55), random (5, -5), random (170, 190), 2, random (-10, 10));
+            A_SpawnProjectile ("SmallBrainPiece", 50, 0, random (0, 360), 2, random (0, 160));
+            A_SpawnProjectile ("SuperWallRedBlood", 46, 0, random (170, 190), 2, random (0, 40));
+        }
+        
+        //explosion effects
+        
+        virtual void A_BrutalSmallExplosion()
+        {
+            A_SpawnItemEx ("DetectFloorCrater",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+            A_SpawnProjectile ("BDExplosionparticles", 0, 0, random (0, 360), 2, random (40, 90));
+            A_SpawnProjectile ("BDExplosionparticles2", 0, 0, random (0, 360), 2, random (40, 90));
+            A_SpawnProjectile ("BDExplosionparticles3", 10, 0, random (0, 360), 2, random (40, 90));
+            A_SpawnProjectile ("MediumExplosionFlames", 0, 0, random (0, 360), 2, random (0, 360));
+            A_SpawnProjectile ("BigNeoSmoke", 0, 0, random (0, 360), 2, random (0, 360));
+            A_SpawnItem ("SplatteredLarge");
+        }
+        
+        virtual void A_BrutalNormalExplosion()
+        {
+            A_SpawnProjectile ("ExplosionSpawner", 0, 0, random (0, 360), 2, 90);
+        }
+        
+        virtual void A_BrutalHugeExplosion()
+        {
+            A_SpawnProjectile ("HugeExplosionSpawner", 0, 0, random (0, 360), 2, 90);
+        }
+        
+        virtual void A_BrutalRidiculousExplosion()
+        {
+            A_SpawnProjectile ("RidiculousExplosionSpawner", 0, 0, random (0, 360), 2, 90);
+        }
+        
+        virtual void A_BrutalGlassExplosion()
+        {
+            A_SpawnProjectile("LargeGlassParticle1",random(5,60),random(-3,3),random(0,360),2,random(20,70));
+            A_SpawnProjectile("LargeGlassParticle2",random(5,60),random(-3,3),random(0,360),2,random(20,70));
+            A_SpawnProjectile("LargeGlassParticle3",random(5,60),random(-3,3),random(0,360),2,random(20,70));
+            A_SpawnProjectile("LargeGlassParticle4",random(5,60),random(-3,3),random(0,360),2,random(20,70));
+        }
+        virtual void A_BrutalJunkExplosion()
+        {
+            A_SpawnProjectile ("XJunk1", 5, 0, random (0, 360), 2, random (40, 150));
+            A_SpawnProjectile ("XJunk2", 5, 0, random (0, 360), 2, random (40, 150));
+            A_SpawnProjectile ("XJunk3", 5, 0, random (0, 360), 2, random (40, 150));
+        }
+}

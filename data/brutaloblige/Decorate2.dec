@@ -1,0 +1,24 @@
+/*************************************
+Decorate for the cast call. Basic versions of the monsters with no TNT1 or 0 frame states so they don't flicker.
+*************************************/
+
+Actor CastCallBelphegor : Belphegor2
+{
+States
+{
+    Spawn:
+		BOS3 BD 10 A_Look
+		Loop
+	See:
+		BOS3 AAAA 2 A_Chase
+		BOS3 BBBB 2 A_Chase("","")
+		BOS3 CCCC 2 A_Chase
+		BOS3 BBBB 2 A_Chase
+		Loop
+    Missile:
+		BOS3 F 8 A_FaceTarget
+		BOS3 G 8 A_FaceTarget
+		BOS3 H 8 A_SpawnProjectile("BelphegorGreenPlasmaBall", 50, 0, 0, 1) 
+		Goto See
+}
+}
