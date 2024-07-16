@@ -2,95 +2,95 @@ BD = {}
 
 BD.MONSTERS =
 {
-	--------------
-	--Tough Bosses
-	--------------
-	Juggernaut =
+    --------------
+    --Tough Bosses
+    --------------
+    Juggernaut =
     {
-		id = 303,
-		r = 48,
-		h = 88,
-		level = 9,
-		boss_type = "tough",
-		boss_prob = 15,
-		boss_limit = 1,
-	    prob = 10,
-	    crazy_prob = 10,
-	    health = 8000,
-	    damage = 200,
-	    attack = "hitscan",
-	    outdoor_factor = 3.0,
-	    density = 0.1,
-	    weap_prefs = { bfg=5.0 },
-	    room_size = "large",
-		nasty = true,
-		boss_replacement = "Spiderdemon",
-	},
-	-- found it in BD21.pk3 - needs testing
-	-- is working but more tests required -> make a prebuilt map with this boss
-	Motherdemon =  
-	{
-		id = 348,
-		r = 60,
-		h = 110,
-		level = 9,
-		health = 6000,
-		boss_type = "tough",
-		boss_prob = 15,
-		boss_limit = 1,
-		prob = 10, --10
-		crazy_prob = 0, --10
-		damage = 200,
-		attack = "missile",
-		outdoor_factor = 3.0,
-		density = 0.1,
-		weap_prefs = { bfg=5.0 },
-		room_size = "large",
-		nasty = true,
-		boss_replacement = "Spiderdemon",
-	},
-	Zyberdemon =
-	{
-		id = 324,
-		r = 40,
-		h = 110,
-		level = DOOM.MONSTERS.Cyberdemon.level,
-		boss_type = DOOM.MONSTERS.Cyberdemon.boss_type,
-		boss_prob = DOOM.MONSTERS.Cyberdemon.boss_prob,
-		boss_limit = 1,
-		prob = DOOM.MONSTERS.Cyberdemon.prob,
-		crazy_prob = DOOM.MONSTERS.Cyberdemon.crazy_prob,
-		health = DOOM.MONSTERS.Cyberdemon.health,
-		damage = DOOM.MONSTERS.Cyberdemon.damage,
-		attack = "hitscan",
-		density = DOOM.MONSTERS.Cyberdemon.density,
-		weap_min_damage = DOOM.MONSTERS.Cyberdemon.weap_min_damage,
-		weap_prefs = DOOM.MONSTERS.Cyberdemon.weap_prefs,
-		room_size = DOOM.MONSTERS.Cyberdemon.room_size,
-		infight_damage = DOOM.MONSTERS.Cyberdemon.infight_damage,
-	},
-	
-	--------------
-	--Mini Bosses
-	--------------	
-	Belphegor =
-	{
-	    id = 302,
-	    r = 32,
-	    h = 88,
-	    level = 7,
+        id = 303,
+        r = 48,
+        h = 88,
+        level = 9,
+        boss_type = "tough",
+        boss_prob = 15,
+        boss_limit = 1,
+        prob = 10,
+        crazy_prob = 10,
+        health = 8000,
+        damage = 200,
+        attack = "hitscan",
+        outdoor_factor = 3.0,
+        density = 0.1,
+        weap_prefs = { bfg=5.0 },
+        room_size = "large",
+        nasty = true,
+        boss_replacement = "Spiderdemon",
+    },
+    -- found it in BD21.pk3 - needs testing
+    -- is working but more tests required -> make a prebuilt map with this boss
+    Motherdemon =  
+    {
+        id = 348,
+        r = 60,
+        h = 110,
+        level = 9,
+        health = 6000,
+        boss_type = "tough",
+        boss_prob = 15,
+        boss_limit = 1,
+        prob = 10, --10
+        crazy_prob = 0, --10
+        damage = 200,
+        attack = "missile",
+        outdoor_factor = 3.0,
+        density = 0.1,
+        weap_prefs = { bfg=5.0 },
+        room_size = "large",
+        nasty = true,
+        boss_replacement = "Spiderdemon",
+    },
+    Zyberdemon =
+    {
+        id = 324,
+        r = 40,
+        h = 110,
+        level = DOOM.MONSTERS.Cyberdemon.level,
+        boss_type = DOOM.MONSTERS.Cyberdemon.boss_type,
+        boss_prob = DOOM.MONSTERS.Cyberdemon.boss_prob,
+        boss_limit = 1,
+        prob = DOOM.MONSTERS.Cyberdemon.prob,
+        crazy_prob = DOOM.MONSTERS.Cyberdemon.crazy_prob,
+        health = DOOM.MONSTERS.Cyberdemon.health,
+        damage = DOOM.MONSTERS.Cyberdemon.damage,
+        attack = "hitscan",
+        density = DOOM.MONSTERS.Cyberdemon.density,
+        weap_min_damage = DOOM.MONSTERS.Cyberdemon.weap_min_damage,
+        weap_prefs = DOOM.MONSTERS.Cyberdemon.weap_prefs,
+        room_size = DOOM.MONSTERS.Cyberdemon.room_size,
+        infight_damage = DOOM.MONSTERS.Cyberdemon.infight_damage,
+    },
+    
+    --------------
+    --Mini Bosses
+    --------------    
+    Belphegor =
+    {
+        id = 302,
+        r = 32,
+        h = 88,
+        level = 7,
         boss_type = "minor",
         boss_prob = 50,
-	    prob = 6.4,
-	    crazy_prob = 12,
-	    health = 2000,
-	    damage = 150,
-	    attack = "missile",
-	    outdoor_factor = 3.0,
-	    density = 0.1,
-	    weap_prefs = { bfg=5.0 },
-	    room_size = "medium",
-	},	
+        prob = 6.4,
+        crazy_prob = 12,
+        health = 2000,
+        damage = 150,
+        attack = "missile",
+        outdoor_factor = 3.0,
+        density = 0.1,
+        weap_prefs = { bfg=5.0 },
+        room_size = "medium",
+    },    
     Volcabus =
     {
         id = 337,
@@ -98,7 +98,7 @@ BD.MONSTERS =
         h = DOOM.MONSTERS.mancubus.h,
         level = DOOM.MONSTERS.mancubus.level+1,
         prob = 7,
-   	    boss_type = "nasty",
+           boss_type = "nasty",
         boss_prob = 50,
         health = 1050,
         damage = DOOM.MONSTERS.mancubus.damage*1.2,
@@ -111,61 +111,61 @@ BD.MONSTERS =
         infight_damage = DOOM.MONSTERS.mancubus.infight_damage,
         weap_min_damage = 110,
     },
-	
-	---------------
-	--Infantry--
-	---------------	
+    
+    ---------------
+    --Infantry--
+    ---------------    
 
-	
-	--As of v20b the evil marine replaces the ss. A script checks if it is in a wolfenstein themed level and changes it back if so.
-	ss_nazi = REMOVE_ME,
-	
-	EvilMarine =
-	{
-	    id = 84,
-	    r = 20, --the evil marine is actually 14 but I've left it as 20 incase it does somehow end up as an ss guard.
-	    h = 56, 
-	    level = 8,
-	    prob = 0,
-	    crazy_prob = 7,
-	    health = 200,
-	    damage = 75,
-	    attack = "hitscan",
-	    cage_factor = 0,  -- never put in cages
-	    density = 0.5,
+    
+    --As of v20b the evil marine replaces the ss. A script checks if it is in a wolfenstein themed level and changes it back if so.
+    ss_nazi = REMOVE_ME,
+    
+    EvilMarine =
+    {
+        id = 84,
+        r = 20, --the evil marine is actually 14 but I've left it as 20 incase it does somehow end up as an ss guard.
+        h = 56, 
+        level = 8,
+        prob = 0,
+        crazy_prob = 7,
+        health = 200,
+        damage = 75,
+        attack = "hitscan",
+        cage_factor = 0,  -- never put in cages
+        density = 0.5,
         infight_damage = 8.0,
-	},
-	BrutalSS = --the script often fails in Oblige levels hence this as well
-	{
-	    id = 311,
-	    r = 20,
-	    h = 56 ,
-	    level = 1,
-	    theme_prob = 35,
+    },
+    BrutalSS = --the script often fails in Oblige levels hence this as well
+    {
+        id = 311,
+        r = 20,
+        h = 56 ,
+        level = 1,
+        theme_prob = 35,
         prob=0,
-	    health = 90,
-	    damage = 20,
-	    attack = "hitscan",
-	    cage_factor = 0,  -- never put in cages
-	    density = 1.0,
-	    allow_in_theme = "wolf",
+        health = 90,
+        damage = 20,
+        attack = "hitscan",
+        cage_factor = 0,  -- never put in cages
+        density = 1.0,
+        allow_in_theme = "wolf",
         give = { {weapon="Mp40"}, {ammo="bullet",count=20} },
-	},
-	EasyMarine =
-	{
-	    id = 307,
-	    r = 14,
-	    h = 56 ,
-	    level = 5,
-	    prob = 0, --9
-	    crazy_prob = 7,
-	    health = 80,
-	    damage = 5,
-	    attack = "hitscan",
-	    cage_factor = 0,  -- never put in cages
-	    density = 0.5,
+    },
+    EasyMarine =
+    {
+        id = 307,
+        r = 14,
+        h = 56 ,
+        level = 5,
+        prob = 0, --9
+        crazy_prob = 7,
+        health = 80,
+        damage = 5,
+        attack = "hitscan",
+        cage_factor = 0,  -- never put in cages
+        density = 0.5,
         infight_damage = 8.0,
-	},
+    },
     ClassicSS =
     {
         id = 313,
@@ -199,11 +199,11 @@ BD.MONSTERS =
         disloyal = DOOM.MONSTERS.arach.disloyal,
         trap_factor = DOOM.MONSTERS.arach.trap_factor,
         infight_damage = DOOM.MONSTERS.arach.infight_damage,
-		weap_min_damage = 90,
+        weap_min_damage = 90,
     },
     --Seperate Rifle and Pistol Zombie so Oblige can model them more accurately
     zombie = REMOVE_ME,
-	
+    
     PistolZombie = 
     {
         id = 344,
@@ -356,75 +356,75 @@ BD.MONSTERS =
         weap_min_damage = 150,
         weap_prefs = { bfg=10.0 },
         room_size = "large",
-    }	
+    }    
 }
 
 BD.WEAPONS =
 {   
     --Some weapons without a spawn id are included. This is so we can add them as dropped items for the monsters.--
     --eg the Mp40 is never placed in maps but is dropped by brutal_ss. It needs an entry here so Oblige can model this.--
-	HandGrenade =
-	{
-	    id=299,
-	    pref=1,
-	    add_prob=0,
-	    --start_prob=10
-	    rate=1,
-	    damage=70,
-	    splash={60,45,30,30,20,10},
-	    attack="missile",
-	    ammo="grenade",
-	    per=1,
-	    rarity=2,
-	    give={ {ammo="grenade",count=1} },
-	},
-	GrenadeLauncher =
-	{
-	    id=298,
-	    level = 3,
-    	pref = 30,
-    	add_prob = 25,
-	    --start_prob=10
-	    rate=1,
-	    damage=100,
-	    splash={60,45,30,30,20,10},
-	    attack="missile",
-	    ammo="rocket",
-	    per=1,
-	    rarity=2,
-	    give={ {ammo="rocket",count=6} },
-	},
-	railgun =
-	{
-	    id=297,
-	    level = 5,
-    	pref = 30,
-    	add_prob = 15,
-	    --start_prob=10
-	    rate=1,
-	    damage=1000,
-	    attack="missile",
-	    ammo="cell",
-	    per=1,
-	    rarity=2,
-	    give={ {ammo="cell",count=50} },
-	},
+    HandGrenade =
+    {
+        id=299,
+        pref=1,
+        add_prob=0,
+        --start_prob=10
+        rate=1,
+        damage=70,
+        splash={60,45,30,30,20,10},
+        attack="missile",
+        ammo="grenade",
+        per=1,
+        rarity=2,
+        give={ {ammo="grenade",count=1} },
+    },
+    GrenadeLauncher =
+    {
+        id=298,
+        level = 3,
+        pref = 30,
+        add_prob = 25,
+        --start_prob=10
+        rate=1,
+        damage=100,
+        splash={60,45,30,30,20,10},
+        attack="missile",
+        ammo="rocket",
+        per=1,
+        rarity=2,
+        give={ {ammo="rocket",count=6} },
+    },
+    railgun =
+    {
+        id=297,
+        level = 5,
+        pref = 30,
+        add_prob = 15,
+        --start_prob=10
+        rate=1,
+        damage=1000,
+        attack="missile",
+        ammo="cell",
+        per=1,
+        rarity=2,
+        give={ {ammo="cell",count=50} },
+    },
     bfg10k =
     {
         id = 296,
         level = 8,
-	    pref = 15,
+        pref = 15,
         upgrades = "bfg",
-	    add_prob = 20,
-	    mp_prob = 6,
-	    attack = "missile",
-	    rate = 0.65,  -- tweaked value, normally 0.8
-	    damage = 300,
-	    splash = {70,70,70,70, 70,70,70,70, 70,70,70,70},
-	    ammo = "cell",
-	    per = 40,
-	    give = { {ammo="cell",count=40} },
-	    bonus_ammo = 40,
+        add_prob = 20,
+        mp_prob = 6,
+        attack = "missile",
+        rate = 0.65,  -- tweaked value, normally 0.8
+        damage = 300,
+        splash = {70,70,70,70, 70,70,70,70, 70,70,70,70},
+        ammo = "cell",
+        per = 40,
+        give = { {ammo="cell",count=40} },
+        bonus_ammo = 40,
     },
     bdpistol =
     {
@@ -650,19 +650,19 @@ BD.NICE_ITEMS =
 }
 
  function BD.decorate()
-	gui.wad_insert_file("data/brutaloblige/BrutalMonsters.dec","BRUMONS");
-	gui.wad_insert_file("data/brutaloblige/Decorate.dec","DECORATE");
-	gui.wad_insert_file("data/brutaloblige/Bolognese.dec","BOLOGNES");	
-	gui.wad_insert_file("data/brutaloblige/BrutalWeapons.dec","BRUWEPS");	
-	gui.wad_insert_file("data/brutaloblige/BrutalPickups.dec","BRUPUPS");
-	
-	gui.wad_insert_file("data/brutaloblige/zscript","ZSCRIPT");
+    gui.wad_insert_file("data/brutaloblige/BrutalMonsters.dec","BRUMONS");
+    gui.wad_insert_file("data/brutaloblige/Decorate.dec","DECORATE");
+    gui.wad_insert_file("data/brutaloblige/Bolognese.dec","BOLOGNES");    
+    gui.wad_insert_file("data/brutaloblige/BrutalWeapons.dec","BRUWEPS");    
+    gui.wad_insert_file("data/brutaloblige/BrutalPickups.dec","BRUPUPS");
+    
+    gui.wad_insert_file("data/brutaloblige/zscript","ZSCRIPT");
     gui.wad_insert_file("data/brutaloblige/base.zscript","ZBASE");
     gui.wad_insert_file("data/brutaloblige/NotCompatibleWithBrutality.zscript","ZBASE2");
     gui.wad_insert_file("data/brutaloblige/wolfmons.zscript","WOLFMONS");
     gui.wad_insert_file("data/brutaloblige/BaseMonsters.zscript","BASEMONS");
-	
-    gui.wad_insert_file("data/brutaloblige/TRNSLATE","TRNSLATE");		
+    
+    gui.wad_insert_file("data/brutaloblige/TRNSLATE","TRNSLATE");        
 
     gui.wad_insert_file("data/brutaloblige/LOADACS","LOADACS");
     gui.wad_insert_file("data/brutaloblige/A_START","A_START");
@@ -673,10 +673,10 @@ BD.NICE_ITEMS =
  function BD.gameinfo()
 
   -- local data =
-	-- {
-	  -- '//ZDoom GAMEINFO lump for Brutal Oblige\n'
-	  -- 'IWAD="Doom2.wad"\n'
-	-- }
+    -- {
+      -- '//ZDoom GAMEINFO lump for Brutal Oblige\n'
+      -- 'IWAD="Doom2.wad"\n'
+    -- }
 
   -- table.insert(data,'LOAD="brutalv20b.pk3","hellonearthstarterpack.wad","bfriend1.pk3"\n')
 -- --no harm in loading the starterpack wad if not used and throws no error if not found so load it regardless of if that module's actually being used
@@ -693,19 +693,19 @@ function BD.setup()
 
  
 -- local confdata =
-	-- {
-	-- 'setslot 1 Chain_Saw ClassicModernSaw Melee_Attacks ClassicFist ClassicSaw\n'
-	-- 'setslot 2 DualRifles Rifle  BrutalPistol ClassicPistol MP40\n'
-	-- 'setslot 3 Shot_Gun SSG ClassicShotgun ClassicSSG\n'
-	-- 'setslot 4 MiniGun ClassicChaingun HitlersBuzzsaw D4Machinegun\n'
-	-- 'setslot 5 GrenadeLauncher Rocket_Launcher ClassicRocketLauncher GrenadeLauncherOblige\n'
-	-- 'setslot 6 RailGun DualPlasmaRifles Plasma_Gun ClassicPlasmaRifle RailGunOblige\n'
-	-- 'setslot 7 BFG10k BIG_FUCKING_GUN VanillaBFG9000 BFG10KOblige D4GaussCannon\n'
-	-- 'setslot 8 HellishMissileLauncher\n'
-	-- 'setslot 9 FlameCannon\n'
-	-- 'setslot 0 HandGrenades HandGrenadesOblige\n'
+    -- {
+    -- 'setslot 1 Chain_Saw ClassicModernSaw Melee_Attacks ClassicFist ClassicSaw\n'
+    -- 'setslot 2 DualRifles Rifle  BrutalPistol ClassicPistol MP40\n'
+    -- 'setslot 3 Shot_Gun SSG ClassicShotgun ClassicSSG\n'
+    -- 'setslot 4 MiniGun ClassicChaingun HitlersBuzzsaw D4Machinegun\n'
+    -- 'setslot 5 GrenadeLauncher Rocket_Launcher ClassicRocketLauncher GrenadeLauncherOblige\n'
+    -- 'setslot 6 RailGun DualPlasmaRifles Plasma_Gun ClassicPlasmaRifle RailGunOblige\n'
+    -- 'setslot 7 BFG10k BIG_FUCKING_GUN VanillaBFG9000 BFG10KOblige D4GaussCannon\n'
+    -- 'setslot 8 HellishMissileLauncher\n'
+    -- 'setslot 9 FlameCannon\n'
+    -- 'setslot 0 HandGrenades HandGrenadesOblige\n'
 
-	-- }
+    -- }
     -- gui.wad_add_text_lump("KEYCONF", confdata);
  end
 
@@ -774,7 +774,8 @@ OB_MODULES["bd_doom_monster_control"] =
 {
   label = _("Brutal Doom Monster Control"),
   game= "doomish",  
-  engine = { zdoom=1, gzdoom=1, skulltag=1},
+  engine = "idtech_1",
+  port = "!limit_enforcing",
 
   tables =
   {
@@ -784,13 +785,13 @@ OB_MODULES["bd_doom_monster_control"] =
   hooks =
   {
     setup = BD.monster_setup,
-    all_done	= BD.all_done,
+    all_done    = BD.all_done,
   },
   options =
   {
- 	Belphegor =
+     Belphegor =
     {
-		label="Belphegor",
+        label="Belphegor",
         choices=BD.CONTROL_CHOICES,
         tooltip="Imagine fighting a Baron of Hell on steroids. You can use that as your happy place when you have to go up against this guy.",
     },
@@ -820,13 +821,13 @@ OB_MODULES["bd_doom_monster_control"] =
         choices=BD.CONTROL_CHOICES,
         tooltip="An even fatter Mancubus with even more massive cannons.",
     },
-	Motherdemon =
+    Motherdemon =
     {
         label="Mother Demon (Beta)",
         choices=BD.CONTROL_CHOICES,
         tooltip="A large demonic larva with dead black eyes, four arms and a skull-like face. Her mouth is filled with many long, sharp teeth. Good luck :)",
     },
-	PistolZombie = { label=_("Pistol Zombie"), choices=BD.CONTROL_CHOICES },
+    PistolZombie = { label=_("Pistol Zombie"), choices=BD.CONTROL_CHOICES },
     RifleZombie =  { label=_("Rifle Zombie"), choices=BD.CONTROL_CHOICES },
     SMGZombie =    { label=_("SMG Zombie"), choices=BD.CONTROL_CHOICES },
   }
@@ -884,8 +885,10 @@ end
 OB_MODULES["bd_doom_weapon_control"] =
 {
   label = _("Brutal Doom Weapon Control"),
-  game= { doom2=1, doom1=1 },
-  engine = { zdoom=1, gzdoom=1, skulltag=1 },
+  game = "doomish",
+  engine = "idtech_1",
+  port = "!limit_enforcing",
+  
   tables =
   {
     BD,
