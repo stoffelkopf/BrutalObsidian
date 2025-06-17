@@ -1,4 +1,4 @@
-**The curently supported version of Brutal Doom is brutalv21.pk3**
+**The curently supported version of Brutal Doom is 21 / 22 Public Beta**
 
 # BrutalObsidian
 
@@ -13,41 +13,6 @@ For those of you who don't know [Obsidian](https://github.com/dashodanger/Obsidi
 * Brutal Doom specific pickups
 
 The generated Level WAD must be loaded after Brutal Doom PK3 !!!!!!
-
-
-**How to use - Latest development version**
-
-1) Download Obsidian if you haven't already and make sure you have the latest supported Brutal Doom. See below for current supported versions.
-
-2) Download or clone this repository.
-
-3) If on Windows run BuildPK3.bat, requires an up to date version of Powershell and .NET
-If on *nix run BuildPK3.sh, requires zip
-
-If this builds successfully then move on to step 4. If this method fails or otherwise can't be used then try the manual method in the next step
-
-3 - Manual) Add all the folders to a zip folder called BrutalObsiadian.zip
-
-Rename it to change the extension from .zip to .pk3, if on Windows you can use the included zip2pk3.bat to do this for you.
-
-Note that if you downloaded this from github rather than cloning the repo you can't just rename that .zip, first you must unzip it, then put the folders that are *inside* the BrutalObsidian-whatever folder that comes out into a zip. This is the way Gitlab works, there's nothing I can do about it.
-
-4) Copy or move the pk3 to Obsidians's addon directory. This will be in the same place as Obsidian.exe on Windows or /usr/share/obsidian/addons on Linux.
-
-5) Run Obsidian, select Menu, Addon List and check the box for BrutalObsidian. Restart Obsidian.
-
-6) Click build to generate a wad with the new maps.
-
-7) Load this wad **after** Brutal Doom
-
-8) Happy bug hunting.
-
-# Current supported versions
-
-  | Version | Expected filename
--- | -- | --
-Obsdian Beta 19
-Brutal Doom | 21 | brutalv21.pk3
 
 
 **Known issues**
